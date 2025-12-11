@@ -1,0 +1,7 @@
+{
+  "name": "Twin Reid Logistics",
+  "description": "High-end urban logistics command center for fleet management, dispatch, and driver training.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
