@@ -180,7 +180,7 @@ export const Academy: React.FC = () => {
                   </div>
                   
                   <div className="flex items-center gap-4">
-                    <span className="text-sm text-zinc-400 hidden sm:block font-mono">{module.duration}</span>
+                    <span className="text-sm text-zinc-400 font-mono">{module.duration}</span>
                     
                     {/* Action Buttons (Visible on hover or mobile) */}
                     <div className="flex items-center gap-1 opacity-100 sm:opacity-0 group-hover:opacity-100 transition-opacity">

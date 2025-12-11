@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Cell } from 'recharts';
-import { TrendingUp, Truck, MapPin, DollarSign, Activity } from 'lucide-react';
+import { TrendingUp, Truck, MapPin, DollarSign, Activity, Download } from 'lucide-react';
 import { Driver, DriverStatus, Load } from '../types';
 import { LoadForm } from './LoadForm';
 
@@ -122,6 +122,25 @@ export const Dashboard: React.FC = () => {
     }
   };
 
+  const handleExport = () => {
+    // Generate CSV Content
+    const headers = ['Day', 'Revenue', 'Miles'];
+    const csvRows = data.map(row => `${row.name},${row.revenue},${row.miles}`);
+    const csvContent = [headers.join(','), ...csvRows].join('\n');
+
+    // Create a Blob
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    
+    // Create download link and trigger click
+    const link = document.createElement('a');
+    link.href = url;
+    link.setAttribute('download', 'twin_reid_weekly_report.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Header */}
@@ -130,13 +149,16 @@ export const Dashboard: React.FC = () => {
           <h1 className="text-4xl font-display font-bold text-white">Command Center</h1>
           <p className="text-zinc-400 mt-1">Twin Reid Logistics Ecosystem</p>
         </div>
-        <div className="flex gap-3">
-          <button className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors border border-zinc-700">
-            Export Report
+        <div className="flex gap-3 w-full md:w-auto">
+          <button 
+            onClick={handleExport}
+            className="flex-1 md:flex-none px-4 py-2 bg-zinc-800 hover:bg-zinc-700 text-white rounded-lg font-medium transition-colors border border-zinc-700 flex items-center justify-center gap-2"
+          >
+            <Download className="w-4 h-4" /> Export Report
           </button>
           <button 
             onClick={() => setIsLoadFormOpen(true)}
-            className="px-4 py-2 bg-twin-red hover:bg-red-700 text-white rounded-lg font-medium transition-colors shadow-[0_0_15px_rgba(139,0,0,0.5)] flex items-center gap-2"
+            className="flex-1 md:flex-none px-4 py-2 bg-twin-red hover:bg-red-700 text-white rounded-lg font-medium transition-colors shadow-[0_0_15px_rgba(139,0,0,0.5)] flex items-center justify-center gap-2"
           >
             <DollarSign className="w-4 h-4" /> Book New Load
           </button>

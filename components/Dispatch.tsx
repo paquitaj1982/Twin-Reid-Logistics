@@ -233,6 +233,8 @@ export const Dispatch: React.FC = () => {
                       <span>{load.id}</span>
                       <span>{load.pickupDate}</span>
                      </div>
+                     
+                     {/* Mobile Edit/Delete - Always visible on mobile */}
                      <div className="flex items-center gap-2 md:hidden">
                        <button onClick={(e) => openEditForm(load, e)} className="p-1.5 hover:bg-zinc-700 rounded text-zinc-400 hover:text-white"><Pencil className="w-4 h-4" /></button>
                        <button onClick={(e) => handleDeleteLoad(load.id, e)} className="p-1.5 hover:bg-zinc-700 rounded text-zinc-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
@@ -285,7 +287,8 @@ export const Dispatch: React.FC = () => {
                     </button>
                   )}
                   
-                  <div className="hidden md:flex items-center justify-end gap-2 mt-2">
+                  {/* Desktop Edit/Delete - Visible on md screens */}
+                  <div className="flex items-center justify-end gap-2 mt-2">
                      <button onClick={(e) => openEditForm(load, e)} className="text-xs text-zinc-500 hover:text-white flex items-center gap-1"><Pencil className="w-3 h-3" /> Edit</button>
                      <span className="text-zinc-700">|</span>
                      <button onClick={(e) => handleDeleteLoad(load.id, e)} className="text-xs text-zinc-500 hover:text-red-500 flex items-center gap-1"><Trash2 className="w-3 h-3" /> Delete</button>
